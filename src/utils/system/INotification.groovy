@@ -1,5 +1,5 @@
 package utils.system;
 
 interface INotification {
-    Boolean notify();
+    Boolean sendNotification();
 }

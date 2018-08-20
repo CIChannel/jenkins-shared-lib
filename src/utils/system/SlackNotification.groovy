@@ -20,7 +20,7 @@ class SlackNotification implements INotification {
         }
     }
 
-    Boolean notify() {
+    Boolean sendNotification() {
         try {
             slackSend (color: this.getColorCode(), message: summary);
             return true;

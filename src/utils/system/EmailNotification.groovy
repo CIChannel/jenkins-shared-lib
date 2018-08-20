@@ -15,7 +15,7 @@ class EmailNotification implements INotification {
         <p>Further information check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""";
     }
 
-    Boolean notify() {
+    Boolean sendNotification() {
         try {
             emailext (
                 subject: subject,
