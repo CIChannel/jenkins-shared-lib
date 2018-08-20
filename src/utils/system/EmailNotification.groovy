@@ -16,7 +16,7 @@ class EmailNotification implements INotification {
     }
     
     String getDetails() {
-        return """<p>${this._caller.currentBuild.result} ${this._env.JOB_NAME} Job in the ${this._env.ENV_NAME} environemt.</p>
+        return """<p>${this._caller.currentBuild.result} ${this._env.JOB_NAME} Job in the ${this._env.ENV_NAME} environment.</p>
         <p>You can refer the build status by using the build number - ${this._env.BUILD_NUMBER}.</p>
         <p>Further information check console output at <a href="${this._env.BUILD_URL}">${this._env.JOB_NAME} [${this._env.BUILD_NUMBER}]</a></p>""";
     }

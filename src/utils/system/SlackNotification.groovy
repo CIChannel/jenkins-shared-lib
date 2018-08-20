@@ -2,15 +2,16 @@ package utils.system;
 import utils.constants;
 
 class SlackNotification implements INotification {
-    private _buildInfo;
+    private _caller;
+    private _env;
 
     SlackNotification(BuildInfo bi, String[] emailAddresses) {
-        this._buildInfo = bi;
-        this._summary = "${env.ENV_NAME} ${env.JOB_NAME} Job has ${bi.status} (${env.BUILD_URL})";
+        this._env = caller.env;
+        this._caller = caller;
     }
 
     String getColorCode() {
-        switch(this._buildInfo.status) {
+        switch(this._caller.currentBuild.result) {
             case BuildConstants.Status.SUCCESS:
                 return Colors.Status.GREEN;
             case BuildConstants.Status.FAILURE:
@@ -20,13 +21,18 @@ class SlackNotification implements INotification {
         }
     }
 
+    String getSummary() {
+        return "${this._env.ENV_NAME} ${this._env.JOB_NAME} Job has ${this._caller.currentBuild.result} (${this._env.BUILD_URL})";
+    }
+
     Boolean sendNotification() {
         try {
-            slackSend (color: this.getColorCode(), message: summary);
+            this._caller.slackSend(color: this.getColorCode(), message: this.getSummary());
             return true;
         } catch (Exception e) {
-            echo "Slack Ext Error: Please refer below for actual build log";
-            echo "Build Log Error: ${ex.getMessage()}";
+            this._caller.echo "Slack Ext Error: Please refer below for actual build log";
+            this._caller.echo "${this._env.BUILD_URL}";
+            this._caller.echo "Logging Error: ${e.getMessage()}";
             return false;
         }
     }
