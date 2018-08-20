@@ -23,7 +23,7 @@ class EmailNotification implements INotification {
 
     Boolean sendNotification() {
         try {
-            emailext (
+            this._caller.emailext (
                 subject: this.getSubject(),
                 body: this.getDetails(),
                 to: this._emailAddresses.join(", ")
