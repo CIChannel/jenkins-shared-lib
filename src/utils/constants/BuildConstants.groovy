@@ -1,5 +1,5 @@
 package utils.constants;
 
 class BuildConstants {
-    enum Status { SUCCESS, FAILURE }
+    public enum Status { SUCCESS, FAILURE }
 }
