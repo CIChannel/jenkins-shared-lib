@@ -6,7 +6,7 @@ class EmailNotification implements INotification {
     private _details;
     private _buildUrl;
 
-    EmailNotification(BuildInfo bi, String[] emailAddresses) {
+    EmailNotification(Object bi, String[] emailAddresses) {
         this._buildInfo = bi;
         this._subject = "${env.ENV_NAME} ${env.JOB_NAME} Job has ${bi.status}";
         this._summary = "${subject} (${env.BUILD_URL})";
