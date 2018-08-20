@@ -5,7 +5,7 @@ class EmailNotification implements INotification {
     private _env;
     private _emailAddresses;
 
-    EmailNotification(caller, String[] emailAddresses) {
+    EmailNotification(caller, ArrayList[] emailAddresses) {
         this._emailAddresses = emailAddresses;
         this._env = caller.env;
         this._caller = caller;
