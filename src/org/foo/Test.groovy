@@ -1,4 +1,4 @@
-package src.org.foo;
+package org.foo;
 class Test {
    int temp1;
    String temp2;
