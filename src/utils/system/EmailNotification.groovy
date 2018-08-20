@@ -1,31 +1,38 @@
 package utils.system;
 
 class EmailNotification implements INotification {
-    private _buildInfo;
-    private _subject;
-    private _details;
-    private _buildUrl;
+    private _caller;
+    private _env;
+    private _emailAddresses;
 
-    EmailNotification(Object bi, String[] emailAddresses) {
-        this._buildInfo = bi;
-        this._subject = "${env.ENV_NAME} ${env.JOB_NAME} Job has ${bi.status}";
-        this._summary = "${subject} (${env.BUILD_URL})";
-        this._details = """<p>${bi.status} ${env.JOB_NAME} Job in the ${env.ENV_NAME} environemt.</p>
-        <p>You can refer the build status by using the build number - ${env.BUILD_NUMBER}.</p>
-        <p>Further information check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""";
+    EmailNotification(caller, String[] emailAddresses) {
+        this._emailAddresses = emailAddresses;
+        this._env = caller.env;
+        this._caller = caller;
+    }
+
+    String getSubject() {
+        return "${this._env.ENV_NAME} ${this._env.JOB_NAME} Job - ${this._caller.currentBuild.result}";
+    }
+    
+    String getDetails() {
+        return """<p>${this._caller.currentBuild.result} ${this._env.JOB_NAME} Job in the ${this._env.ENV_NAME} environemt.</p>
+        <p>You can refer the build status by using the build number - ${this._env.BUILD_NUMBER}.</p>
+        <p>Further information check console output at <a href="${this._env.BUILD_URL}">${this._env.JOB_NAME} [${this._env.BUILD_NUMBER}]</a></p>""";
     }
 
     Boolean sendNotification() {
         try {
             emailext (
-                subject: subject,
-                body: details,
-                to: emailAddresses.join(", ")
+                subject: this.getSubject(),
+                body: this.getDetails(),
+                to: this._emailAddresses.join(", ")
             )
             return true;
         } catch (Exception e) {
             echo "Email Ext Error: Please refer below for actual build log";
-            echo "Build Log Error: ${ex.getMessage()}";
+            echo "${this._env.BUILD_URL}"
+            echo "Logging Error: ${ex.getMessage()}";
             return false;
         }
     }
