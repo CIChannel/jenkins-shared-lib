@@ -32,7 +32,7 @@ class EmailNotification implements INotification {
         } catch (Exception e) {
             println("Email Ext Error: Please refer below for actual build log");
             println("${this._env.BUILD_URL}");
-            println("Logging Error: ${ex.getMessage()}");
+            println("Logging Error: ${e.getMessage()}");
             return false;
         }
     }
