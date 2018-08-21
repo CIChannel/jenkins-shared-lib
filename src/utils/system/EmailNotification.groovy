@@ -5,7 +5,7 @@ class EmailNotification implements INotification {
     private _env;
     private _emailAddresses;
 
-    EmailNotification(caller, ArrayList[] emailAddresses) {
+    EmailNotification(caller, ArrayList<String>[] emailAddresses) {
         this._emailAddresses = emailAddresses;
         this._env = caller.env;
         this._caller = caller;
@@ -23,6 +23,9 @@ class EmailNotification implements INotification {
 
     Boolean sendNotification() {
         try {
+            def temp = this._emailAddresses.join(', ');
+            this._caller.echo "Email ids - ${this._emailAddresses}";
+            this._caller.echo "Email ids string - ${temp}";
             this._caller.emailext (
                 subject: this.getSubject(),
                 body: this.getDetails(),
