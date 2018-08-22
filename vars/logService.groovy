@@ -3,19 +3,27 @@ import java.util.logging.Logger;
 
 Logger logger = Logger.getLogger("");
 
-void info(msg) {
-    logger.info("\nINFO: ${msg}\n");
+void info(caller, msg) {
+    caller.info("\nINFO: ${msg}\n");
 }
 
-void warning(warning, ex) {
-    logger.info("\nWARNING: ${warning}\n");
-    logger.info("\nEXCEPTION: ${exception.getMessage()}\n");
+void warning(caller, warning, ex) {
+    caller.info("\nWARNING: ${warning}\n");
+    caller.info("\nEXCEPTION: ${exception.getMessage()}\n");
 }
 
-void error(msg, exception, isStackTrace = false) {
-    logger.error("\nERROR: ${msg}\n");
-    logger.error("\nEXCEPTION: ${exception.getMessage()}\n");
-    if (isStackTrace) {
-        logger.error("\nSTACKTRCE: ${exception.printStackTrace()}\n");
+void error(caller, msg, exception, isStackTrace = false) {
+    if (caller) {
+        caller.error("\nERROR: ${msg}\n");
+        caller.error("\nEXCEPTION: ${exception.getMessage()}\n");
+        if (isStackTrace) {
+            caller.error("\nSTACKTRCE: ${exception.printStackTrace()}\n");
+        }
+    } else {
+        echo "\nERROR: ${msg}\n";
+        echo "\nEXCEPTION: ${exception.getMessage()}\n";
+        if (isStackTrace) {
+            echo "\nSTACKTRCE: ${exception.printStackTrace()}\n";
+        }
     }
 }
