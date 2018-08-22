@@ -5,7 +5,7 @@ class SlackNotification implements INotification {
     private _caller;
     private _env;
 
-    SlackNotification(BuildInfo bi, String[] emailAddresses) {
+    SlackNotification(caller) {
         this._env = caller.env;
         this._caller = caller;
     }
