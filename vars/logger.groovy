@@ -1,20 +1,21 @@
+#!/usr/bin/groovy
 import java.util.logging.Logger;
 
 Logger logger = Logger.getLogger("");
 
-def info(msg) {
-    logger.info("INFO: ${msg}");
+void info(msg) {
+    logger.info("\nINFO: ${msg}\n");
 }
 
-def warning(warning, ex) {
-    logger.info("WARNING: ${warning}");
-    logger.info("EXCEPTION: ${exception.getMessage()}");
+void warning(warning, ex) {
+    logger.info("\nWARNING: ${warning}\n");
+    logger.info("\nEXCEPTION: ${exception.getMessage()}\n");
 }
 
-def error(msg, exception, isStackTrace = false) {
-    logger.error("ERROR: ${msg}");
-    logger.error("EXCEPTION: ${exception.getMessage()}");
+void error(msg, exception, isStackTrace = false) {
+    logger.error("\nERROR: ${msg}\n");
+    logger.error("\nEXCEPTION: ${exception.getMessage()}\n");
     if (isStackTrace) {
-        logger.error("STACKTRCE: ${exception.printStackTrace()}");
+        logger.error("\nSTACKTRCE: ${exception.printStackTrace()}\n");
     }
 }
