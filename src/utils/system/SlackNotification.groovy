@@ -13,9 +13,9 @@ class SlackNotification implements INotification {
 
     String getColorCode() {
         switch(this._caller.currentBuild.result) {
-            case BuildConstants.Status.SUCCESS:
+            case BuildConstants.Status.SUCCESS.toString():
                 return Random.Colors.GREEN;
-            case BuildConstants.Status.FAILURE:
+            case BuildConstants.Status.FAILURE.toString():
                 return Random.Colors.RED;
             default:
                 return Random.Colors.YELLOW;
@@ -28,9 +28,9 @@ class SlackNotification implements INotification {
 
     Boolean sendNotification() {
         try {
-            this._caller.echo "Logging Color Code: ${this.getColorCode()}";
+            this._caller.echo "Logging Color Code: ${this.getColorCode().toString()}";
             this._caller.echo "CurrentBuild.result: ${this._caller.currentBuild.result}";
-            this._caller.slackSend(color: this.getColorCode(), message: this.getSummary());
+            this._caller.slackSend(color: this.getColorCode().toString(), message: this.getSummary());
             return true;
         } catch (Exception e) {
             this._caller.echo "Slack Ext Error: Please refer below for actual build log";
