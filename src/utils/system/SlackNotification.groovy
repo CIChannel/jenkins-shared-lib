@@ -28,6 +28,8 @@ class SlackNotification implements INotification {
 
     Boolean sendNotification() {
         try {
+            this._caller.echo "Logging Color Code: ${this.getColorCode()}";
+            this._caller.echo "CurrentBuild.result: ${this._caller.currentBuild.result}";
             this._caller.slackSend(color: this.getColorCode(), message: this.getSummary());
             return true;
         } catch (Exception e) {
