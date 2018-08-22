@@ -1,6 +1,6 @@
 package utils.system;
 import utils.constants.BuildConstants;
-import utils.constants.Colors;
+import utils.constants.Random;
 
 class SlackNotification implements INotification {
     private _caller;
@@ -14,11 +14,11 @@ class SlackNotification implements INotification {
     String getColorCode() {
         switch(this._caller.currentBuild.result) {
             case BuildConstants.Status.SUCCESS:
-                return Colors.GREEN;
+                return Random.Colors.GREEN;
             case BuildConstants.Status.FAILURE:
-                return Colors.RED;
+                return Random.Colors.RED;
             default:
-                return Colors.YELLOW;
+                return Random.Colors.YELLOW;
         }
     }
 
