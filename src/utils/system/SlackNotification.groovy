@@ -1,5 +1,6 @@
 package utils.system;
 import utils.constants.BuildConstants;
+import utils.constants.Colors;
 
 class SlackNotification implements INotification {
     private _caller;
