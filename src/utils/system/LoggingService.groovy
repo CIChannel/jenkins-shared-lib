@@ -6,7 +6,7 @@ class LoggingService implements Serializable {
 
     LoggingService(caller) {
         this._caller = caller;
-        this._logger = caller.logger;
+        this._logger = caller.log;
     }
 
     void info(caller, msg) {
