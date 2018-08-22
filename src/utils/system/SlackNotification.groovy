@@ -5,7 +5,7 @@ import utils.constants.Random;
 class SlackNotification implements INotification {
     private _caller;
     private _env;
-    private enum _status = { good, warning, danger };
+    private enum _status { good, warning, danger };
 
     SlackNotification(caller) {
         this._env = caller.env;
