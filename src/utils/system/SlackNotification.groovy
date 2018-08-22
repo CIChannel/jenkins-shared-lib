@@ -14,11 +14,11 @@ class SlackNotification implements INotification {
     String getColorCode() {
         switch(this._caller.currentBuild.result) {
             case BuildConstants.Status.SUCCESS:
-                return Colors.Status.GREEN;
-            case BuildConstants.Status.FAILURE:
-                return Colors.Status.RED;
+                return Colors.GREEN;
+            case BuildConstants.FAILURE:
+                return Colors.RED;
             default:
-                return Colors.Status.YELLOW;
+                return Colors.YELLOW;
         }
     }
 
