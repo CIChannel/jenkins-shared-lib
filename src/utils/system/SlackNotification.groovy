@@ -15,7 +15,7 @@ class SlackNotification implements INotification {
         switch(this._caller.currentBuild.result) {
             case BuildConstants.Status.SUCCESS:
                 return Colors.GREEN;
-            case BuildConstants.FAILURE:
+            case BuildConstants.Status.FAILURE:
                 return Colors.RED;
             default:
                 return Colors.YELLOW;
