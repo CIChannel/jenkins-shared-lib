@@ -14,6 +14,6 @@ void error(msg, exception, isStackTrace = false) {
     echo "\nERROR: ${msg}\n";
     echo "\nEXCEPTION: ${exception.getMessage()}\n";
     if (isStackTrace) {
-        echo "\nSTACKTRCE: ${exception.printStackTrace()}\n";
+        echo "\nSTACKTRACE: ${exception.getStackTrace()}\n";
     }
 }
