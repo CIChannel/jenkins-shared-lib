@@ -5,6 +5,7 @@ import utils.constants.Random;
 class SlackNotification implements INotification {
     private _caller;
     private _env;
+    private enum _status = { good, warning, danger };
 
     SlackNotification(caller) {
         this._env = caller.env;
@@ -14,11 +15,11 @@ class SlackNotification implements INotification {
     String getColorCode() {
         switch(this._caller.currentBuild.result) {
             case BuildConstants.Status.SUCCESS.toString():
-                return Random.Colors.GREEN;
+                return this._status.good;
             case BuildConstants.Status.FAILURE.toString():
-                return Random.Colors.RED;
+                return this._status.danger;
             default:
-                return Random.Colors.YELLOW;
+                return this._status.warning;
         }
     }
 
